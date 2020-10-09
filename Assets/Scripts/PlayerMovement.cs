@@ -7,24 +7,41 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public float speed = 1;
-    private bool jumpAvailable = false;
+    private bool jumpAvailable = true;
+    private float oldXVelocity = 0;
+    Rigidbody rb;
 
+    private void Start()
+    {
+        rb = gameObject.GetComponent<Rigidbody>();
+    }
 
     void Update()
     {
-        gameObject.GetComponent<Rigidbody>().AddForce(new Vector2(Input.GetAxis("Horizontal") * speed, 0));
-        if (Input.GetAxis("Jump") == 1 && jumpAvailable)
+        if  (Physics.Raycast(transform.position, Vector2.down,0.33f))
         {
-            gameObject.GetComponent<Rigidbody>().AddForce(new Vector2(0, 500));
-            jumpAvailable = false;
+            jumpAvailable = true;
+        }
+
+        if (jumpAvailable)
+        {
+            if (Input.GetAxis("Jump") == 1)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 5);
+            }
+        } else {
+            rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Floor")
+        if (collision.contacts[0].point.y < transform.position.y)
         {
-            jumpAvailable = true;
+            if (collision.gameObject.tag == "Floor")
+            {
+                jumpAvailable = true;
+            }
         }
     }
 
