@@ -11,8 +11,10 @@ using System.IO;
 public class SpellCasting : MonoBehaviour
 {
     TMP_InputField input;
-    bool isTyping = false;
     private SpVoice voice;
+    PlayerVariables player;
+
+
 
     string loadXMLStandalone(string fileName)
     {
@@ -30,6 +32,7 @@ public class SpellCasting : MonoBehaviour
     {
         voice = new SpVoice();
         input = GetComponent<TMP_InputField>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerVariables>();
     }
 
 
@@ -37,18 +40,18 @@ public class SpellCasting : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Return) && !isTyping)
+        if (Input.GetKeyDown(KeyCode.Return) && !player.isTyping)
         {
             input.ActivateInputField();
             input.Select();
-            isTyping = true;
+            player.isTyping = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Return) && isTyping)
+        if (Input.GetKeyDown(KeyCode.Return) && player.isTyping)
         {
             voice.Speak(input.text, SpeechVoiceSpeakFlags.SVSFlagsAsync | SpeechVoiceSpeakFlags.SVSFIsXML);
             input.text = "";
-            isTyping = false;
+            player.isTyping = false;
         }
     }
 
