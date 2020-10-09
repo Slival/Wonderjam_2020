@@ -14,6 +14,7 @@ public class SpellCasting : MonoBehaviour
     private SpVoice voice;
     PlayerVariables player;
 
+    GameObject fireballPrefab;
 
 
     string loadXMLStandalone(string fileName)
@@ -33,6 +34,21 @@ public class SpellCasting : MonoBehaviour
         voice = new SpVoice();
         input = GetComponent<TMP_InputField>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerVariables>();
+        input.enabled = false;
+    }
+
+    IEnumerator OpenInput()
+    {
+        yield return new WaitForSeconds(0.1f);
+        player.isTyping = true;
+        yield return null;
+    }
+
+    IEnumerator CloseInput()
+    {
+        yield return new WaitForSeconds(0.1f);
+        player.isTyping = false;
+        yield return null;
     }
 
 
@@ -42,18 +58,49 @@ public class SpellCasting : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Return) && !player.isTyping)
         {
-            input.ActivateInputField();
+            input.enabled = true;
             input.Select();
-            player.isTyping = true;
+            input.ActivateInputField();
+            StartCoroutine(OpenInput());
         }
 
         if (Input.GetKeyDown(KeyCode.Return) && player.isTyping)
         {
+
             voice.Speak(input.text, SpeechVoiceSpeakFlags.SVSFlagsAsync | SpeechVoiceSpeakFlags.SVSFIsXML);
+            Cast(input.text);
             input.text = "";
-            player.isTyping = false;
+            input.enabled = false;
+            StartCoroutine(CloseInput());
         }
     }
 
+    void Cast(string spellName)
+    {
+        if (spellName.ToLower() == "fireball" || spellName.ToLower() == "boule de feu")
+        {
+            Instantiate(fireballPrefab);
+        }
+        if (spellName.ToLower() == "arcane jump" || spellName.ToLower() == "super saut")
+        {
+            player.GetComponent<Rigidbody>().AddForce(Vector3.up*1000);
+        }
+        if (spellName.ToLower() == "stop time" || spellName.ToLower() == "temps mort")
+        {
+            player.GetComponent<Rigidbody>().AddForce(Vector3.up * 1000);
+        }
+        if (spellName.ToLower() == "lightning strike" || spellName.ToLower() == "eclair" || spellName.ToLower() == "éclair")
+        {
+            
+        }
+        if (spellName.ToLower() == "giant" || spellName.ToLower() == "geant" || spellName.ToLower() == "géant")
+        {
+            player.transform.localScale += new Vector3(.2f, .2f, .2f);
+        }
+        if (spellName.ToLower() == "macro")
+        {
+            player.transform.localScale += new Vector3(1.2f, 1.2f, 1.2f);
+        }
+    }
 
 }

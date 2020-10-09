@@ -19,7 +19,6 @@ public class DoorInteraction : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("In the door trigger");
         if (other.tag == "Door" && Input.GetKeyDown(KeyCode.W))
         {
             SceneManager.LoadScene(other.GetComponent<Door>().sceneIndex);
