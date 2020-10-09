@@ -6,33 +6,44 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public float speed = 1;
+    public float speed;
+    public float airSpeed;
+    public float cap;
+
     private bool jumpAvailable = true;
-    private float oldXVelocity = 0;
+    private float oldXVelocity;
     Rigidbody rb;
+
+    private void OnDrawGizmos()
+    {
+        Vector2 pos = transform.position;
+        Debug.DrawRay(new Vector2(pos.x, pos.y), Vector2.left * 0.4f, Color.red);
+        Debug.DrawRay(new Vector2(pos.x, pos.y), Vector2.right * 0.4f, Color.red);
+        Debug.DrawRay(new Vector2(pos.x, pos.y + 0.2f), Vector2.left * 0.4f, Color.red);
+        Debug.DrawRay(new Vector2(pos.x, pos.y + 0.2f), Vector2.right * 0.4f, Color.red);
+        Debug.DrawRay(new Vector2(pos.x, pos.y - 0.2f), Vector2.left * 0.4f, Color.red);
+        Debug.DrawRay(new Vector2(pos.x, pos.y - 0.2f), Vector2.right * 0.4f, Color.red);
+    }
+
+
 
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
-    }
+        oldXVelocity = 0;
+}
 
     void Update()
     {
-        if  (Physics.Raycast(transform.position, Vector2.down,0.33f))
-        {
-            jumpAvailable = true;
-        }
+        jumpAvailable = IsTouchingGround();
 
-        if (jumpAvailable)
-        {
-            if (Input.GetAxis("Jump") == 1)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, 5);
-            }
-        } else {
-            rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, rb.velocity.y);
-        }
+        MovePlayer();
+
+        CapVelocity();
+
+        oldXVelocity = rb.velocity.x;
     }
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -44,7 +55,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.tag == "Floor")
@@ -52,6 +62,52 @@ public class PlayerMovement : MonoBehaviour
             jumpAvailable = false;
         }
     }
+    private bool IsTouchingWall()
+    {
+        Vector2 pos = transform.position;
+        return Physics.Raycast(new Vector2(pos.x, pos.y), Vector2.left, 0.4f) ||
+            Physics.Raycast(new Vector2(pos.x, pos.y), Vector2.right, 0.4f) ||
+            Physics.Raycast(new Vector2(pos.x, pos.y + 0.2f), Vector2.left, 0.4f) ||
+            Physics.Raycast(new Vector2(pos.x, pos.y + 0.2f), Vector2.right, 0.4f) ||
+            Physics.Raycast(new Vector2(pos.x, pos.y - 0.2f), Vector2.left, 0.4f) ||
+            Physics.Raycast(new Vector2(pos.x, pos.y - 0.2f), Vector2.right, 0.4f);
+    }
+    private bool IsTouchingGround()
+    {
+        return Physics.Raycast(transform.position, Vector2.down, 0.33f);
+    }
 
+    private void MovePlayer()
+    {
+        if (jumpAvailable)
+        {
+            //rb.AddForce(new Vector2(rb.velocity.x + Input.GetAxis("Horizontal") * speed / 20, rb.velocity.y));
+            rb.velocity = new Vector2(rb.velocity.x + Input.GetAxis("Horizontal") * speed / 20, rb.velocity.y);
+            if (Input.GetAxis("Jump") == 1)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 5);
+                jumpAvailable = false;
+            }
+    }
+        else
+        {
+            if (IsTouchingWall())
+            {
+                rb.velocity = new Vector2(rb.velocity.x + Input.GetAxis("Horizontal") * airSpeed / 20, rb.velocity.y);
+            } else { 
+                rb.velocity = new Vector2(oldXVelocity + Input.GetAxis("Horizontal") * airSpeed / 20, rb.velocity.y);
+            }
+        }
+    }
 
+    private void CapVelocity()
+    {
+        if (rb.velocity.x >= cap)
+        {
+            rb.velocity = new Vector2(cap, rb.velocity.y);
+        } else if (rb.velocity.x <= -cap)
+        {
+            rb.velocity = new Vector2(-cap, rb.velocity.y);
+        }
+    }
 }
