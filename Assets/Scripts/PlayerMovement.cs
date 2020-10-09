@@ -17,12 +17,9 @@ public class PlayerMovement : MonoBehaviour
     private void OnDrawGizmos()
     {
         Vector2 pos = transform.position;
-        Debug.DrawRay(new Vector2(pos.x, pos.y), Vector2.left * 0.4f, Color.red);
-        Debug.DrawRay(new Vector2(pos.x, pos.y), Vector2.right * 0.4f, Color.red);
-        Debug.DrawRay(new Vector2(pos.x, pos.y + 0.2f), Vector2.left * 0.4f, Color.red);
-        Debug.DrawRay(new Vector2(pos.x, pos.y + 0.2f), Vector2.right * 0.4f, Color.red);
-        Debug.DrawRay(new Vector2(pos.x, pos.y - 0.2f), Vector2.left * 0.4f, Color.red);
-        Debug.DrawRay(new Vector2(pos.x, pos.y - 0.2f), Vector2.right * 0.4f, Color.red);
+        Debug.DrawRay(new Vector2(pos.x, pos.y) * 0.33f, Vector2.down);
+        Debug.DrawRay(new Vector2(pos.x + 0.14f, pos.y) * 0.25f, Vector2.down);
+        Debug.DrawRay(new Vector2(pos.x - 0.14f, pos.y) * 0.25f, Vector2.down);
     }
 
 
@@ -74,15 +71,17 @@ public class PlayerMovement : MonoBehaviour
     }
     private bool IsTouchingGround()
     {
-        return Physics.Raycast(transform.position, Vector2.down, 0.33f);
+        Vector2 pos = transform.position;
+        return Physics.Raycast(transform.position, Vector2.down, 0.33f) ||
+            Physics.Raycast(new Vector2(pos.x + 0.14f, pos.y), Vector2.down, 0.25f) ||
+            Physics.Raycast(new Vector2(pos.x - 0.14f, pos.y), Vector2.down, 0.25f);
     }
 
     private void MovePlayer()
     {
         if (jumpAvailable)
         {
-            //rb.AddForce(new Vector2(rb.velocity.x + Input.GetAxis("Horizontal") * speed / 20, rb.velocity.y));
-            rb.velocity = new Vector2(rb.velocity.x + Input.GetAxis("Horizontal") * speed / 20, rb.velocity.y);
+            rb.velocity = new Vector2(rb.velocity.x / 1.5f + Input.GetAxis("Horizontal") * speed / 20, rb.velocity.y);
             if (Input.GetAxis("Jump") == 1)
             {
                 rb.velocity = new Vector2(rb.velocity.x, 5);
@@ -92,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             if (IsTouchingWall())
-            {
+            { 
                 rb.velocity = new Vector2(rb.velocity.x + Input.GetAxis("Horizontal") * airSpeed / 20, rb.velocity.y);
             } else { 
                 rb.velocity = new Vector2(oldXVelocity + Input.GetAxis("Horizontal") * airSpeed / 20, rb.velocity.y);
