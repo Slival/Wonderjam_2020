@@ -788,7 +788,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-<<<<<<< Updated upstream
     - target: {fileID: 4615931319306419888, guid: 21446638aecc88f4895f3fe45149f314,
         type: 3}
       propertyPath: speed
@@ -840,8 +839,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 13400000, guid: 0482db0ac85b4cc49be86da4b899303b,
         type: 2}
-=======
->>>>>>> Stashed changes
     - target: {fileID: 4615931319306419894, guid: 21446638aecc88f4895f3fe45149f314,
         type: 3}
       propertyPath: m_LocalPosition.x
