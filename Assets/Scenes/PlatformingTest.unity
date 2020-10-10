@@ -788,57 +788,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4615931319306419888, guid: 21446638aecc88f4895f3fe45149f314,
-        type: 3}
-      propertyPath: speed
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 4615931319306419888, guid: 21446638aecc88f4895f3fe45149f314,
-        type: 3}
-      propertyPath: airSpeed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4615931319306419888, guid: 21446638aecc88f4895f3fe45149f314,
-        type: 3}
-      propertyPath: cap
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4615931319306419889, guid: 21446638aecc88f4895f3fe45149f314,
-        type: 3}
-      propertyPath: m_CollisionDetection
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4615931319306419889, guid: 21446638aecc88f4895f3fe45149f314,
-        type: 3}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4615931319306419889, guid: 21446638aecc88f4895f3fe45149f314,
-        type: 3}
-      propertyPath: m_AngularDrag
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4615931319306419889, guid: 21446638aecc88f4895f3fe45149f314,
-        type: 3}
-      propertyPath: m_Drag
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4615931319306419893, guid: 21446638aecc88f4895f3fe45149f314,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4615931319306419893, guid: 21446638aecc88f4895f3fe45149f314,
-        type: 3}
-      propertyPath: m_Height
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4615931319306419893, guid: 21446638aecc88f4895f3fe45149f314,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: 0482db0ac85b4cc49be86da4b899303b,
-        type: 2}
     - target: {fileID: 4615931319306419894, guid: 21446638aecc88f4895f3fe45149f314,
         type: 3}
       propertyPath: m_LocalPosition.x
