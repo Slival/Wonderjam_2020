@@ -14,7 +14,7 @@ public class SpellCasting : MonoBehaviour
     private SpVoice voice;
     PlayerVariables player;
 
-    GameObject fireballPrefab;
+    public GameObject fireballPrefab;
 
 
     string loadXMLStandalone(string fileName)
@@ -79,7 +79,9 @@ public class SpellCasting : MonoBehaviour
     {
         if (spellName.ToLower() == "fireball" || spellName.ToLower() == "boule de feu")
         {
-            Instantiate(fireballPrefab);
+            GameObject fireball = Instantiate(fireballPrefab);
+            fireball.transform.position = player.transform.position;
+            fireball.GetComponent<Rigidbody>().velocity = new Vector3(1, 1, 0);
         }
         if (spellName.ToLower() == "arcane jump" || spellName.ToLower() == "super saut")
         {
@@ -95,7 +97,7 @@ public class SpellCasting : MonoBehaviour
         }
         if (spellName.ToLower() == "giant" || spellName.ToLower() == "geant" || spellName.ToLower() == "géant")
         {
-            player.transform.localScale += new Vector3(.2f, .2f, .2f);
+            player.transform.localScale *= 1.2f;
         }
         if (spellName.ToLower() == "macro")
         {
