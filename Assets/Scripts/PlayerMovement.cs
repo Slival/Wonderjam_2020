@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public bool goingLeft;
     public PlayerVariables pVar;
     public SpriteRenderer playerSprite;
-    public bool walking;
+    public bool idling;
     public bool jumping;
 
     private bool jumpAvailable = true;
@@ -53,6 +53,11 @@ public class PlayerMovement : MonoBehaviour
             UpdatePlayerOrientation(goingLeft);
         }
 
+
+        CheckIdle();
+
+        CheckJumping();
+
         jumpAvailable = IsTouchingGround();
 
         MovePlayer();
@@ -60,6 +65,30 @@ public class PlayerMovement : MonoBehaviour
         CapVelocity();
 
         oldXVelocity = rb.velocity.x;
+    }
+
+    private void CheckIdle()
+    {
+        if (rb.velocity.magnitude < 1 && IsTouchingGround())
+        {
+            playerSprite.gameObject.GetComponent<Animator>().SetBool("idling", true);
+        }
+        else
+        {
+            playerSprite.gameObject.GetComponent<Animator>().SetBool("idling", false);
+        }
+    }
+
+    private void CheckJumping()
+    {
+        if (!IsTouchingGround())
+        {
+            playerSprite.gameObject.GetComponent<Animator>().SetBool("falling", true);
+        }
+        if (IsTouchingGround())
+        {
+            playerSprite.gameObject.GetComponent<Animator>().SetBool("falling", false);
+        }
     }
 
     private void CheckPlayerOrientation(float ori)
