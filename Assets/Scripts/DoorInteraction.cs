@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class DoorInteraction : MonoBehaviour
 {
+    private int index;
+    private bool canEnterDoor;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,14 +16,26 @@ public class DoorInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.W) && canEnterDoor)
+        {
+            SceneManager.LoadScene(index);
+        }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Door" && Input.GetKeyDown(KeyCode.W))
         {
-            SceneManager.LoadScene(other.GetComponent<Door>().sceneIndex);
+            index = other.GetComponent<Door>().sceneIndex;
+            canEnterDoor = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Door" && Input.GetKeyDown(KeyCode.W))
+        {
+            canEnterDoor = false;
         }
     }
 }
