@@ -9,6 +9,9 @@ public class PlayerMovement : MonoBehaviour
     public float speed;
     public float airSpeed;
     public float cap;
+    public bool goingLeft;
+
+    public Sprite PlayerSprite;
 
     private bool jumpAvailable = true;
     private float oldXVelocity;
