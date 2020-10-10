@@ -10,8 +10,10 @@ public class PlayerMovement : MonoBehaviour
     public float airSpeed;
     public float cap;
     public bool goingLeft;
-
+    public PlayerVariables pVar;
     public SpriteRenderer playerSprite;
+    public bool walking;
+    public bool jumping;
 
     private bool jumpAvailable = true;
     private float oldXVelocity;
@@ -29,19 +31,27 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+
         rb = gameObject.GetComponent<Rigidbody>();
         oldXVelocity = 0;
         if (playerSprite == null)
         {
             playerSprite = GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>();
         }
+        if (pVar == null)
+        {
+            gameObject.GetComponent<PlayerVariables>();
+        }
     }
 
     void Update()
     {
-        CheckPlayerOrientation(Input.GetAxis("Horizontal"));
+        if (!pVar.isTyping)
+        {
+            CheckPlayerOrientation(Input.GetAxis("Horizontal"));
 
-        UpdatePlayerOrientation(goingLeft);
+            UpdatePlayerOrientation(goingLeft);
+        }
 
         jumpAvailable = IsTouchingGround();
 
@@ -122,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        if (jumpAvailable)
+        if (jumpAvailable && !pVar.isTyping)
         {
             rb.velocity = new Vector2(rb.velocity.x / 1.5f + Input.GetAxis("Horizontal") * speed / 20, rb.velocity.y);
             if (Input.GetAxis("Jump") == 1)
@@ -131,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
                 jumpAvailable = false;
             }
     }
-        else
+        else if (!pVar.isTyping)
         {
             //if (IsTouchingWall())
 //            { 
