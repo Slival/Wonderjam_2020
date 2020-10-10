@@ -81,19 +81,19 @@ public class SpellCasting : MonoBehaviour
         if (spellName.ToLower() == "fireball" || spellName.ToLower() == "boule de feu")
         {
             GameObject fireball = Instantiate(fireballPrefab);
-            float direction = 1;
+            float direction;
             if (player.GetComponent<PlayerMovement>().goingLeft)
             {
-                fireball.transform.Rotate(new Vector3(135, 0, 0));
-                direction = -1;
+                fireball.transform.Rotate(new Vector3(180, 0, 0));
+                direction = -3;
             } else
             {
-                fireball.transform.Rotate(new Vector3(35, 0, 0));
-                direction = 1;
+                fireball.transform.Rotate(new Vector3(0, 0, 0));
+                direction = 3;
             }
 
             fireball.transform.position = new Vector3(player.transform.position.x + direction/10, player.transform.position.y, player.transform.position.z);
-            fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction, 1, 0);
+            fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction, 0, 0);
         }
         if (spellName.ToLower() == "arcane jump" || spellName.ToLower() == "super saut")
         {

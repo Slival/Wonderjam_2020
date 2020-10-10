@@ -9734,7 +9734,7 @@ Transform:
   m_GameObject: {fileID: 8510643499788483802}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_Children:
   - {fileID: 9163915622056736179}
   - {fileID: 5224425399493009121}
@@ -9868,7 +9868,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 1.8407e-41, z: 0, w: -6.9849193e-10}
+  m_BoundingSphereOverride: {x: 0, y: 5.2403e-41, z: 0, w: 0.0000000026775524}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
