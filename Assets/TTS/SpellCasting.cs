@@ -16,6 +16,7 @@ public class SpellCasting : MonoBehaviour
 
     public GameObject fireballPrefab;
     public GameObject iceProjectilePrefab;
+    public GameObject boulderPrefab;
 
 
     string loadXMLStandalone(string fileName)
@@ -87,19 +88,39 @@ public class SpellCasting : MonoBehaviour
             if (player.GetComponent<PlayerMovement>().goingLeft)
             {
                 fireball.transform.Rotate(new Vector3(180, 0, 0));
-                direction = -3;
+                direction = -1;
             } else
             {
                 fireball.transform.Rotate(new Vector3(0, 0, 0));
-                direction = 3;
+                direction = 1;
             }
 
             fireball.transform.position = new Vector3(player.transform.position.x + direction/10, player.transform.position.y, player.transform.position.z);
-            fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction, 0, 0);
+            fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction * 3, 0, 0);
         }
         if (spellName.ToLower() == "arcane jump" || spellName.ToLower() == "super saut")
         {
-            player.GetComponent<Rigidbody>().AddForce(Vector3.up*1000);
+            player.GetComponent<Rigidbody>().AddForce(Vector3.up * 1000);
+        }
+        if (spellName.ToLower() == "boulder Toss" || spellName.ToLower() == "lancer de rocher")
+        {
+            GameObject boulder = Instantiate(boulderPrefab);
+            float direction = 1;
+            if (player.GetComponent<PlayerMovement>().goingLeft)
+            {
+                boulder.transform.Rotate(new Vector3(180, 0, 0));
+                direction = -1;
+            }
+            else
+            {
+                boulder.transform.Rotate(new Vector3(0, 0, 0));
+                direction = 1;
+            }
+
+            boulder.transform.position = new Vector3(player.transform.position.x + direction / 10, player.transform.position.y, player.transform.position.z);
+            boulder.GetComponent<Rigidbody>().velocity = new Vector3(direction * 2, 2, 0);
+
+            Destroy(GameObject.Find("IceWall(Clone)"));
         }
         if (spellName.ToLower() == "stop time" || spellName.ToLower() == "temps mort")
         {
@@ -111,17 +132,19 @@ public class SpellCasting : MonoBehaviour
             float direction = 1;
             if (player.GetComponent<PlayerMovement>().goingLeft)
             {
-                fireball.transform.Rotate(new Vector3(135, 0, 0));
+                fireball.transform.Rotate(new Vector3(180, 0, 0));
                 direction = -1;
             }
             else
             {
-                fireball.transform.Rotate(new Vector3(35, 0, 0));
+                fireball.transform.Rotate(new Vector3(0, 0, 0));
                 direction = 1;
             }
 
             fireball.transform.position = new Vector3(player.transform.position.x + direction / 10, player.transform.position.y, player.transform.position.z);
-            fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction, 1, 0);
+            fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction * 2, 2, 0);
+
+            Destroy(GameObject.Find("IceWall(Clone)"));
         }
         if (spellName.ToLower() == "lightning strike" || spellName.ToLower() == "eclair" || spellName.ToLower() == "éclair")
         {
