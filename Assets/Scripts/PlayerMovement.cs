@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public float cap;
     public bool goingLeft;
 
-    public Sprite PlayerSprite;
+    public SpriteRenderer playerSprite;
 
     private bool jumpAvailable = true;
     private float oldXVelocity;
@@ -31,10 +31,18 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody>();
         oldXVelocity = 0;
-}
+        if (playerSprite == null)
+        {
+            playerSprite = GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>();
+        }
+    }
 
     void Update()
     {
+        CheckPlayerOrientation(Input.GetAxis("Horizontal"));
+
+        UpdatePlayerOrientation(goingLeft);
+
         jumpAvailable = IsTouchingGround();
 
         MovePlayer();
@@ -44,6 +52,32 @@ public class PlayerMovement : MonoBehaviour
         oldXVelocity = rb.velocity.x;
     }
 
+    private void CheckPlayerOrientation(float ori)
+    {
+        if (ori > 0.05f)
+        {
+            goingLeft = false;
+        }
+        if (ori < -0.05f)
+        {
+            goingLeft = true;
+        }
+        if (ori < 0.05f && ori > -0.05f)
+        {
+            
+        }
+    }
+    private void UpdatePlayerOrientation(bool left)
+    {
+        if (left)
+        {
+            playerSprite.flipX = true;
+        }
+        else
+        {
+            playerSprite.flipX = false;
+        }
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
