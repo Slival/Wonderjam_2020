@@ -40,6 +40,7 @@ public class SpellCasting : MonoBehaviour
 
     IEnumerator OpenInput()
     {
+        Time.timeScale = 0.2f;
         yield return new WaitForSeconds(0.1f);
         player.isTyping = true;
         yield return null;
@@ -47,6 +48,7 @@ public class SpellCasting : MonoBehaviour
 
     IEnumerator CloseInput()
     {
+        Time.timeScale = 1f;
         yield return new WaitForSeconds(0.1f);
         player.isTyping = false;
         yield return null;

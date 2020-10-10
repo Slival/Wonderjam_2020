@@ -261,7 +261,10 @@ MonoBehaviour:
   airSpeed: 1.5
   cap: 3
   goingLeft: 0
-  playerSprite: {fileID: 0}
+  pVar: {fileID: 7216332263829823560}
+  playerSprite: {fileID: 3783544917071251585}
+  walking: 0
+  jumping: 0
 --- !u!114 &2687986969343173707
 MonoBehaviour:
   m_ObjectHideFlags: 0
