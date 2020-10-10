@@ -377,6 +377,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireballPrefab: {fileID: 8510643499788483802, guid: 12874da05505e79459136da7748be1ef,
     type: 3}
+  iceProjectilePrefab: {fileID: 8510643499788483802, guid: 441fd7e6c3f2a88418cf9d973bd3f2d7,
+    type: 3}
 --- !u!1 &8162922065536668171
 GameObject:
   m_ObjectHideFlags: 0

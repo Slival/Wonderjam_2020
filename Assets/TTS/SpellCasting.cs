@@ -15,6 +15,7 @@ public class SpellCasting : MonoBehaviour
     PlayerVariables player;
 
     public GameObject fireballPrefab;
+    public GameObject iceProjectilePrefab;
 
 
     string loadXMLStandalone(string fileName)
@@ -80,8 +81,19 @@ public class SpellCasting : MonoBehaviour
         if (spellName.ToLower() == "fireball" || spellName.ToLower() == "boule de feu")
         {
             GameObject fireball = Instantiate(fireballPrefab);
-            fireball.transform.position = player.transform.position;
-            fireball.GetComponent<Rigidbody>().velocity = new Vector3(1, 1, 0);
+            float direction = 1;
+            if (player.GetComponent<PlayerMovement>().goingLeft)
+            {
+                fireball.transform.Rotate(new Vector3(135, 0, 0));
+                direction = -1;
+            } else
+            {
+                fireball.transform.Rotate(new Vector3(35, 0, 0));
+                direction = 1;
+            }
+
+            fireball.transform.position = new Vector3(player.transform.position.x + direction/10, player.transform.position.y, player.transform.position.z);
+            fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction, 1, 0);
         }
         if (spellName.ToLower() == "arcane jump" || spellName.ToLower() == "super saut")
         {
@@ -91,9 +103,27 @@ public class SpellCasting : MonoBehaviour
         {
             player.GetComponent<Rigidbody>().AddForce(Vector3.up * 1000);
         }
+        if (spellName.ToLower() == "ice barrier" || spellName.ToLower() == "barriere de glace" || spellName.ToLower() == "barrière de glace")
+        {
+            GameObject fireball = Instantiate(iceProjectilePrefab);
+            float direction = 1;
+            if (player.GetComponent<PlayerMovement>().goingLeft)
+            {
+                fireball.transform.Rotate(new Vector3(135, 0, 0));
+                direction = -1;
+            }
+            else
+            {
+                fireball.transform.Rotate(new Vector3(35, 0, 0));
+                direction = 1;
+            }
+
+            fireball.transform.position = new Vector3(player.transform.position.x + direction / 10, player.transform.position.y, player.transform.position.z);
+            fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction, 1, 0);
+        }
         if (spellName.ToLower() == "lightning strike" || spellName.ToLower() == "eclair" || spellName.ToLower() == "éclair")
         {
-            
+            player.GetComponent<Rigidbody>().AddForce(Vector3.up * 1000);
         }
         if (spellName.ToLower() == "giant" || spellName.ToLower() == "geant" || spellName.ToLower() == "géant")
         {

@@ -81,6 +81,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+
+        if (collision.contacts[0].thisCollider.name == "UpperCollider";
         if (collision.contacts[0].point.y < transform.position.y)
         {
             if (collision.gameObject.tag == "Floor")
