@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 5684687483247158217}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.404224, y: 4.747182, z: 4.9433}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 4776418797851720185}
   m_RootOrder: 0
@@ -94,10 +94,9 @@ GameObject:
   - component: {fileID: 2653280964533958945}
   - component: {fileID: 5306128790197026479}
   - component: {fileID: 7233715550051905722}
-  - component: {fileID: -6349733722974832924}
   m_Layer: 0
-  m_Name: Ice Projectile 1
-  m_TagString: Untagged
+  m_Name: Boulder
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 8510643499788483802}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_Children:
   - {fileID: 9163915622056736179}
   m_Father: {fileID: 0}
@@ -131,7 +130,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!33 &5306128790197026479
 MeshFilter:
@@ -152,18 +151,5 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-6349733722974832924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8510643499788483802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a814b7465f04ce847b58a02981742697, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iceWall: {fileID: 1389282080097345578, guid: 4f3fa6dc2c90eea4188c715ea344670b, type: 3}
+  m_Radius: 2.5
+  m_Center: {x: 0, y: 0.66, z: 0}

@@ -102,8 +102,10 @@ public class SpellCasting : MonoBehaviour
         {
             player.GetComponent<Rigidbody>().AddForce(Vector3.up * 1000);
         }
-        if (spellName.ToLower() == "boulder Toss" || spellName.ToLower() == "lancer de rocher")
+        if (spellName.ToLower() == "boulder toss" || spellName.ToLower() == "boulder throw" || spellName.ToLower() == "lancer de rocher")
         {
+            Destroy(GameObject.Find("Boulder(Clone)"));
+
             GameObject boulder = Instantiate(boulderPrefab);
             float direction = 1;
             if (player.GetComponent<PlayerMovement>().goingLeft)
@@ -120,7 +122,6 @@ public class SpellCasting : MonoBehaviour
             boulder.transform.position = new Vector3(player.transform.position.x + direction / 10, player.transform.position.y, player.transform.position.z);
             boulder.GetComponent<Rigidbody>().velocity = new Vector3(direction * 2, 2, 0);
 
-            Destroy(GameObject.Find("IceWall(Clone)"));
         }
         if (spellName.ToLower() == "stop time" || spellName.ToLower() == "temps mort")
         {

@@ -94,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.contacts[0].thisCollider.name == "UpperCollider")
         {
-            oldXVelocity = -oldXVelocity;
+            oldXVelocity = -oldXVelocity / 10;
 
         }
         if (collision.contacts[0].point.y < transform.position.y)
@@ -132,24 +132,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        if (jumpAvailable && !pVar.isTyping)
-        {
+        //if (jumpAvailable && !pVar.isTyping)
+        //{
             rb.velocity = new Vector2(rb.velocity.x / 1.5f + Input.GetAxis("Horizontal") * speed / 20, rb.velocity.y);
-            if (Input.GetAxis("Jump") == 1)
+            if (Input.GetAxis("Jump") == 1 && IsTouchingGround())
             {
                 rb.velocity = new Vector2(rb.velocity.x, 5);
                 jumpAvailable = false;
             }
-    }
-        else if (!pVar.isTyping)
-        {
-            //if (IsTouchingWall())
-//            { 
-                rb.velocity = new Vector2(rb.velocity.x + Input.GetAxis("Horizontal") * airSpeed / 20, rb.velocity.y);
-         //   } else { 
-        //        rb.velocity = new Vector2(oldXVelocity + Input.GetAxis("Horizontal") * airSpeed / 20, rb.velocity.y);
-           // }
-        }
+    //}
+        //else if (!pVar.isTyping)
+        //{
+           // rb.velocity = new Vector2(rb.velocity.x + Input.GetAxis("Horizontal") * airSpeed / 20, rb.velocity.y);
+        //}
     }
 
     private void CapVelocity()
