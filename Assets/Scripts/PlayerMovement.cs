@@ -82,7 +82,11 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
 
-        if (collision.contacts[0].thisCollider.name == "UpperCollider";
+        if (collision.contacts[0].thisCollider.name == "UpperCollider")
+        {
+            oldXVelocity = -oldXVelocity;
+
+        }
         if (collision.contacts[0].point.y < transform.position.y)
         {
             if (collision.gameObject.tag == "Floor")
@@ -129,12 +133,12 @@ public class PlayerMovement : MonoBehaviour
     }
         else
         {
-            if (IsTouchingWall())
-            { 
+            //if (IsTouchingWall())
+//            { 
                 rb.velocity = new Vector2(rb.velocity.x + Input.GetAxis("Horizontal") * airSpeed / 20, rb.velocity.y);
-            } else { 
-                rb.velocity = new Vector2(oldXVelocity + Input.GetAxis("Horizontal") * airSpeed / 20, rb.velocity.y);
-            }
+         //   } else { 
+        //        rb.velocity = new Vector2(oldXVelocity + Input.GetAxis("Horizontal") * airSpeed / 20, rb.velocity.y);
+           // }
         }
     }
 
