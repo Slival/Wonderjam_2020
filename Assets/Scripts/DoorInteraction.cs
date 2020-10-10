@@ -24,7 +24,7 @@ public class DoorInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Door" && Input.GetKeyDown(KeyCode.W))
+        if (other.tag == "Door")
         {
             index = other.GetComponent<Door>().sceneIndex;
             canEnterDoor = true;
@@ -33,7 +33,7 @@ public class DoorInteraction : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Door" && Input.GetKeyDown(KeyCode.W))
+        if (other.tag == "Door")
         {
             canEnterDoor = false;
         }
