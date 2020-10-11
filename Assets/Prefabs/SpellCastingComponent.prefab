@@ -379,6 +379,8 @@ MonoBehaviour:
     type: 3}
   iceProjectilePrefab: {fileID: 8510643499788483802, guid: 441fd7e6c3f2a88418cf9d973bd3f2d7,
     type: 3}
+  boulderPrefab: {fileID: 8510643499788483802, guid: 7d86585d65a361e4c9eb5dd74f904156,
+    type: 3}
 --- !u!1 &8162922065536668171
 GameObject:
   m_ObjectHideFlags: 0
