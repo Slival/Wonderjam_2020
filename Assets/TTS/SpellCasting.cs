@@ -62,7 +62,7 @@ public class SpellCasting : MonoBehaviour
         player.isTyping = false;
         yield return null;
     }
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -90,20 +90,40 @@ public class SpellCasting : MonoBehaviour
             ResetTime();
         }
     }
-
     void Cast(string spellName)
     {
-        if (inTrigger && spellName.ToLower() == trigger.GetComponent<TextTrigger>().answer)
+
+        if (inTrigger && spellName.ToLower().Contains(trigger.GetComponent<TextTrigger>().answer))
         {
-            CastFireball();
+            trigger.GetComponent<TextTrigger>().AcceptAnswer();
         }
-        if (spellName.ToLower() == "arcane jump" || spellName.ToLower() == "super saut")
+
+        else if (!inTrigger)
         {
-            player.GetComponent<Rigidbody>().velocity = Vector3.up * 6;
-        }
-        if (spellName.ToLower() == "boulder toss" || spellName.ToLower() == "boulder throw" || spellName.ToLower() == "lancer de rocher")
-        {
-            Destroy(GameObject.Find("Boulder(Clone)"));
+            if (spellName.ToLower() == "fireball" || spellName.ToLower() == "boule de feu")
+            {
+                CastFireball();
+            }
+            if (spellName.ToLower() == "arcane jump" || spellName.ToLower() == "super saut")
+            {
+                player.GetComponent<Rigidbody>().velocity = Vector3.up * 6;
+            }
+            if (spellName.ToLower() == "boulder toss" || spellName.ToLower() == "boulder throw" || spellName.ToLower() == "lancer de rocher")
+            {
+                Destroy(GameObject.Find("Boulder(Clone)"));
+
+                GameObject boulder = Instantiate(boulderPrefab);
+                float direction = 1;
+                if (player.GetComponent<PlayerMovement>().goingLeft)
+                {
+                    boulder.transform.Rotate(new Vector3(180, 0, 0));
+                    direction = -1;
+                }
+                else
+                {
+                    boulder.transform.Rotate(new Vector3(0, 0, 0));
+                    direction = 1;
+                }
 
                 boulder.transform.position = new Vector3(player.transform.position.x + direction / 10, player.transform.position.y, player.transform.position.z);
                 boulder.GetComponent<Rigidbody>().velocity = new Vector3(direction * 2, 2, 0);
@@ -111,11 +131,11 @@ public class SpellCasting : MonoBehaviour
             }
             if (spellName.ToLower() == "stop time" || spellName.ToLower() == "temps mort")
             {
-                Time.timeScale = 0.1f;
-                pm.speed *= 10;
-                pm.airSpeed *= 10;
-                player.GetComponent<Rigidbody>().mass *= 10;
-                timeStopCountDown = Time.unscaledTime;
+                Time.timeScale = 0.3334f;
+                pm.speed *= 3;
+                pm.airSpeed *= 3;
+                pm.cap *= 3;
+                timeStopStamp = Time.unscaledTime;
             }
             if (spellName.ToLower() == "ice barrier" || spellName.ToLower() == "barriere de glace" || spellName.ToLower() == "barrière de glace")
             {
@@ -135,20 +155,29 @@ public class SpellCasting : MonoBehaviour
                 fireball.transform.position = new Vector3(player.transform.position.x + direction / 10, player.transform.position.y, player.transform.position.z);
                 fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction * 2, 2, 0);
 
-        }
-        if ((spellName.ToLower() == "stop time" || spellName.ToLower() == "time stop" || spellName.ToLower() == "slow time" || spellName.ToLower() == "temps mort") && timeStopStamp + 5 <= Time.fixedUnscaledTime)
-        {
-            Time.timeScale = 0.3334f;
-            pm.speed *= 3f;
-            pm.airSpeed *= 3f;
-            pm.cap *= 3f;
-            timeStopStamp = Time.fixedUnscaledTime;
-        }
-        if (spellName.ToLower() == "ice barrier" || spellName.ToLower() == "barriere de glace" || spellName.ToLower() == "barrière de glace")
-        {
-            GameObject fireball = Instantiate(iceProjectilePrefab);
-            float direction = 1;
-            if (player.GetComponent<PlayerMovement>().goingLeft)
+            }
+            if ((spellName.ToLower() == "stop time" || spellName.ToLower() == "time stop" || spellName.ToLower() == "slow time" || spellName.ToLower() == "temps mort") && timeStopStamp + 5 <= Time.fixedUnscaledTime)
+            {
+                Time.timeScale = 0.3334f;
+                pm.speed *= 3f;
+                pm.airSpeed *= 3f;
+                pm.cap *= 3f;
+                timeStopStamp = Time.fixedUnscaledTime;
+            }
+            if (spellName.ToLower() == "ice barrier" || spellName.ToLower() == "barriere de glace" || spellName.ToLower() == "barrière de glace")
+            {
+                GameObject fireball = Instantiate(iceProjectilePrefab);
+                float direction = 1;
+                if (player.GetComponent<PlayerMovement>().goingLeft)
+                {
+                    player.GetComponent<Rigidbody>().AddForce(Vector3.up * 1000);
+                }
+                fireball.transform.position = new Vector3(player.transform.position.x + direction / 10, player.transform.position.y, player.transform.position.z);
+                fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction * 2, 2, 0);
+
+                Destroy(GameObject.Find("IceWall(Clone)"));
+            }
+            if (spellName.ToLower() == "lightning strike" || spellName.ToLower() == "eclair" || spellName.ToLower() == "éclair")
             {
                 player.GetComponent<Rigidbody>().AddForce(Vector3.up * 1000);
             }
@@ -160,31 +189,12 @@ public class SpellCasting : MonoBehaviour
             {
                 player.transform.localScale += new Vector3(1.2f, 1.2f, 1.2f);
             }
-        }  
-    }
-
-            fireball.transform.position = new Vector3(player.transform.position.x + direction / 10, player.transform.position.y, player.transform.position.z);
-            fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction * 2, 2, 0);
-
-            Destroy(GameObject.Find("IceWall(Clone)"));
-        }
-        if (spellName.ToLower() == "lightning strike" || spellName.ToLower() == "eclair" || spellName.ToLower() == "éclair")
-        {
-            player.GetComponent<Rigidbody>().AddForce(Vector3.up * 1000);
-        }
-        if (spellName.ToLower() == "giant" || spellName.ToLower() == "geant" || spellName.ToLower() == "géant")
-        {
-            player.transform.localScale *= 1.2f;
-        }
-        if (spellName.ToLower() == "macro")
-        {
-            player.transform.localScale += new Vector3(1.2f, 1.2f, 1.2f);
-        }
-        if (spellName.ToLower() == "aeiou" || spellName.ToLower() == "john madden")
-        {
-            for (int i = 0; i < 20; i++)
+            if (spellName.ToLower() == "aeiou" || spellName.ToLower() == "john madden")
             {
-                CastFireball();
+                for (int i = 0; i < 20; i++)
+                {
+                    CastFireball();
+                }
             }
         }
     }
@@ -196,7 +206,6 @@ public class SpellCasting : MonoBehaviour
             pm.speed /= 3f;
             pm.airSpeed /= 3f;
             pm.cap /= 3f;
-            player.GetComponent<Rigidbody>().mass /= 3f;
 
         }
     }
