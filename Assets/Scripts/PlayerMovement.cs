@@ -14,8 +14,8 @@ public class PlayerMovement : MonoBehaviour
     public SpriteRenderer playerSprite;
     public bool idling;
     public bool jumping;
+    public bool jumpAvailable = true;
 
-    private bool jumpAvailable = true;
     private float oldXVelocity;
     Rigidbody rb;
 
@@ -49,15 +49,15 @@ public class PlayerMovement : MonoBehaviour
         if (!pVar.isTyping)
         {
             CheckPlayerOrientation(Input.GetAxis("Horizontal"));
-
             UpdatePlayerOrientation(goingLeft);
         }
-
-
         CheckIdle();
-
         CheckJumping();
 
+    }
+
+    private void FixedUpdate()
+    {
         jumpAvailable = IsTouchingGround();
 
         MovePlayer();
@@ -163,16 +163,20 @@ public class PlayerMovement : MonoBehaviour
     {
         if (jumpAvailable && !pVar.isTyping)
         {
-            rb.velocity = new Vector2(rb.velocity.x / 1.5f + Input.GetAxis("Horizontal") * speed / 20, rb.velocity.y);
+            rb.velocity = new Vector2(rb.velocity.x / 2f + Input.GetAxis("Horizontal") * speed / 20, rb.velocity.y);
             if (Input.GetAxis("Jump") == 1 && IsTouchingGround())
             {
-                rb.velocity = new Vector2(rb.velocity.x, 5);
+                rb.velocity = new Vector2(rb.velocity.x, 1.5f + 3 / Time.timeScale);
                 jumpAvailable = false;
             }
         }
         else if (!pVar.isTyping)
         {
             rb.velocity = new Vector2(rb.velocity.x + Input.GetAxis("Horizontal") * airSpeed / 20, rb.velocity.y);
+        }
+        if (!jumpAvailable && Time.timeScale != 0.2f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + Time.timeScale - 1);
         }
     }
 

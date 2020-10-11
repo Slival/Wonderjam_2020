@@ -54,7 +54,7 @@ public class SpellCasting : MonoBehaviour
 
     IEnumerator CloseInput()
     {
-        if (Time.timeScale >= 0.2f)
+        if (Time.timeScale == 0.2f)
             Time.timeScale = 1f;
         yield return new WaitForSeconds(0.1f);
         player.isTyping = false;
@@ -83,7 +83,7 @@ public class SpellCasting : MonoBehaviour
             StartCoroutine(CloseInput());
         }
 
-        if (timeStopStamp + 5 <= Time.fixedUnscaledTime)
+        if (timeStopStamp + 5 <= Time.fixedUnscaledTime && Time.timeScale == 0.3334f)
         {
             ResetTime();
         }
@@ -120,12 +120,12 @@ public class SpellCasting : MonoBehaviour
             boulder.GetComponent<Rigidbody>().velocity = new Vector3(direction * 2, 2, 0);
 
         }
-        if (spellName.ToLower() == "stop time" || spellName.ToLower() == "temps mort")
+        if ((spellName.ToLower() == "stop time" || spellName.ToLower() == "time stop" || spellName.ToLower() == "slow time" || spellName.ToLower() == "temps mort") && timeStopStamp + 5 <= Time.fixedUnscaledTime)
         {
-            Time.timeScale = 0.1f;
-            pm.speed *= 10;
-            pm.airSpeed *= 10;
-            player.GetComponent<Rigidbody>().mass *= 10;
+            Time.timeScale = 0.3334f;
+            pm.speed *= 3f;
+            pm.airSpeed *= 3f;
+            pm.cap *= 3f;
             timeStopStamp = Time.fixedUnscaledTime;
         }
         if (spellName.ToLower() == "ice barrier" || spellName.ToLower() == "barriere de glace" || spellName.ToLower() == "barrière de glace")
@@ -170,12 +170,14 @@ public class SpellCasting : MonoBehaviour
     }
     private void ResetTime()
     {
-        if (Time.timeScale < 0.2f)
+        if (Time.timeScale == 0.3334f && player.GetComponent<PlayerMovement>().jumpAvailable)
         {
             Time.timeScale = 1;
-            pm.speed /= 10;
-            pm.airSpeed /= 10;
-            player.GetComponent<Rigidbody>().mass /= 10;
+            pm.speed /= 3f;
+            pm.airSpeed /= 3f;
+            pm.cap /= 3f;
+            player.GetComponent<Rigidbody>().mass /= 3f;
+
         }
     }
     private void CastFireball()
