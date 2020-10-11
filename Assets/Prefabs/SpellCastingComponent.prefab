@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 8162922065368049490}
   - component: {fileID: 8162922065368049495}
   m_Layer: 5
-  m_Name: InputField (TMP)
+  m_Name: SpellCasting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -375,6 +375,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c117a6eb5b5ddf74ba03f113cffec92f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inTrigger: 0
+  trigger: {fileID: 0}
   fireballPrefab: {fileID: 8510643499788483802, guid: 12874da05505e79459136da7748be1ef,
     type: 3}
   iceProjectilePrefab: {fileID: 8510643499788483802, guid: 441fd7e6c3f2a88418cf9d973bd3f2d7,

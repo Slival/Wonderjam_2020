@@ -14,6 +14,8 @@ public class SpellCasting : MonoBehaviour
     private SpVoice voice;
     PlayerVariables player;
     PlayerMovement pm;
+    public bool inTrigger;
+    public GameObject trigger;
 
     private float timeStopStamp;
 
@@ -91,7 +93,7 @@ public class SpellCasting : MonoBehaviour
 
     void Cast(string spellName)
     {
-        if (spellName.ToLower() == "fireball" || spellName.ToLower() == "boule de feu")
+        if (inTrigger && spellName.ToLower() == trigger.GetComponent<TextTrigger>().answer)
         {
             CastFireball();
         }
@@ -103,21 +105,35 @@ public class SpellCasting : MonoBehaviour
         {
             Destroy(GameObject.Find("Boulder(Clone)"));
 
-            GameObject boulder = Instantiate(boulderPrefab);
-            float direction = 1;
-            if (player.GetComponent<PlayerMovement>().goingLeft)
-            {
-                boulder.transform.Rotate(new Vector3(180, 0, 0));
-                direction = -1;
-            }
-            else
-            {
-                boulder.transform.Rotate(new Vector3(0, 0, 0));
-                direction = 1;
-            }
+                boulder.transform.position = new Vector3(player.transform.position.x + direction / 10, player.transform.position.y, player.transform.position.z);
+                boulder.GetComponent<Rigidbody>().velocity = new Vector3(direction * 2, 2, 0);
 
-            boulder.transform.position = new Vector3(player.transform.position.x + direction / 10, player.transform.position.y, player.transform.position.z);
-            boulder.GetComponent<Rigidbody>().velocity = new Vector3(direction * 2, 2, 0);
+            }
+            if (spellName.ToLower() == "stop time" || spellName.ToLower() == "temps mort")
+            {
+                Time.timeScale = 0.1f;
+                pm.speed *= 10;
+                pm.airSpeed *= 10;
+                player.GetComponent<Rigidbody>().mass *= 10;
+                timeStopCountDown = Time.unscaledTime;
+            }
+            if (spellName.ToLower() == "ice barrier" || spellName.ToLower() == "barriere de glace" || spellName.ToLower() == "barrière de glace")
+            {
+                GameObject fireball = Instantiate(iceProjectilePrefab);
+                float direction = 1;
+                if (player.GetComponent<PlayerMovement>().goingLeft)
+                {
+                    fireball.transform.Rotate(new Vector3(180, 0, 0));
+                    direction = -1;
+                }
+                else
+                {
+                    fireball.transform.Rotate(new Vector3(0, 0, 0));
+                    direction = 1;
+                }
+
+                fireball.transform.position = new Vector3(player.transform.position.x + direction / 10, player.transform.position.y, player.transform.position.z);
+                fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction * 2, 2, 0);
 
         }
         if ((spellName.ToLower() == "stop time" || spellName.ToLower() == "time stop" || spellName.ToLower() == "slow time" || spellName.ToLower() == "temps mort") && timeStopStamp + 5 <= Time.fixedUnscaledTime)
@@ -134,14 +150,18 @@ public class SpellCasting : MonoBehaviour
             float direction = 1;
             if (player.GetComponent<PlayerMovement>().goingLeft)
             {
-                fireball.transform.Rotate(new Vector3(180, 0, 0));
-                direction = -1;
+                player.GetComponent<Rigidbody>().AddForce(Vector3.up * 1000);
             }
-            else
+            if (spellName.ToLower() == "giant" || spellName.ToLower() == "geant" || spellName.ToLower() == "géant")
             {
-                fireball.transform.Rotate(new Vector3(0, 0, 0));
-                direction = 1;
+                player.transform.localScale *= 1.2f;
             }
+            if (spellName.ToLower() == "macro")
+            {
+                player.transform.localScale += new Vector3(1.2f, 1.2f, 1.2f);
+            }
+        }  
+    }
 
             fireball.transform.position = new Vector3(player.transform.position.x + direction / 10, player.transform.position.y, player.transform.position.z);
             fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction * 2, 2, 0);
