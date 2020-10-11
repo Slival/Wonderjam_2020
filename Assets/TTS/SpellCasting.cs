@@ -93,10 +93,14 @@ public class SpellCasting : MonoBehaviour
     void Cast(string spellName)
     {
 
-        if (inTrigger && spellName.ToLower().Contains(trigger.GetComponent<TextTrigger>().answer))
+        if (trigger != null)
         {
-            trigger.GetComponent<TextTrigger>().AcceptAnswer();
+            if (inTrigger && spellName.ToLower().Contains(trigger.GetComponent<TextTrigger>().answer))
+            {
+                trigger.GetComponent<TextTrigger>().AcceptAnswer();
+            }
         }
+        
 
         else if (!inTrigger)
         {
