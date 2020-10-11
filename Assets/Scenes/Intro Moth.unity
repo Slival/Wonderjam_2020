@@ -5325,15 +5325,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textbox: {fileID: 1529176591}
   text:
-  - Hello traveler! I'm the gatekeep of this forest of incredible trials.
-  - To get past me, you will have to answer me this riddle, oh humble traveler.
-  - Where can I find the brightest, hottest light around, I am asking this riddle
-    for a friend kind traveler.
+  - Hello traveler! I'm the gatekeeper of the forest of incredible trials.
+  - To get past me, you will have to answer this riddle, oh humble traveler.
+  - What is the greatest, brightest, hottest light source around, I am asking this
+    riddle for a friend kind traveler.
   answer: sun
   hasAnswer: 0
   successText:
-  - Good answer! Now give me a good warcry before I let you go, show me you can handle
-    the forest!
+  - Yes good idea! I mean.. Good answer, traveler! Now give me a good warcry before
+    I let you in!
   - Yeah! You'll do great! See you around Sir Fish.
   - Huh huh!
   - Woo!
