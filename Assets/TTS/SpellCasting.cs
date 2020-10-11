@@ -198,6 +198,7 @@ public class SpellCasting : MonoBehaviour
             }
         }
     }
+
     private void ResetTime()
     {
         if (Time.timeScale == 0.3334f && player.GetComponent<PlayerMovement>().jumpAvailable)
@@ -209,6 +210,7 @@ public class SpellCasting : MonoBehaviour
 
         }
     }
+
     private void CastFireball()
     {
         GameObject fireball = Instantiate(fireballPrefab);
@@ -223,7 +225,6 @@ public class SpellCasting : MonoBehaviour
             fireball.transform.Rotate(new Vector3(0, 0, 0));
             direction = 1;
         }
-
         fireball.transform.position = new Vector3(player.transform.position.x + direction / 10, player.transform.position.y, player.transform.position.z);
         fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction * 3, 0, 0);
     }
