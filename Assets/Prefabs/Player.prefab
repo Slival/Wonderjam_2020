@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 2170003782223200879}
   m_Layer: 0
   m_Name: UpperColider
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -265,6 +265,7 @@ MonoBehaviour:
   playerSprite: {fileID: 3783544917071251585}
   idling: 0
   jumping: 0
+  jumpAvailable: 1
 --- !u!114 &2687986969343173707
 MonoBehaviour:
   m_ObjectHideFlags: 0
