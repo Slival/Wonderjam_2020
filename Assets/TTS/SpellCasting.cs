@@ -113,7 +113,7 @@ public class SpellCasting : MonoBehaviour
                 Destroy(GameObject.Find("Boulder(Clone)"));
 
                 GameObject boulder = Instantiate(boulderPrefab);
-                float direction = 1;
+                float direction;
                 if (player.GetComponent<PlayerMovement>().goingLeft)
                 {
                     boulder.transform.Rotate(new Vector3(180, 0, 0));
@@ -125,8 +125,8 @@ public class SpellCasting : MonoBehaviour
                     direction = 1;
                 }
 
-                boulder.transform.position = new Vector3(player.transform.position.x + direction / 10, player.transform.position.y, player.transform.position.z);
-                boulder.GetComponent<Rigidbody>().velocity = new Vector3(direction * 2, 2, 0);
+                boulder.transform.position = new Vector3(player.transform.position.x + direction, player.transform.position.y + 1, player.transform.position.z);
+                //boulder.GetComponent<Rigidbody>().velocity = new Vector2(direction * 2, 2);
 
             }
             if (spellName.ToLower() == "ice barrier" || spellName.ToLower() == "barriere de glace" || spellName.ToLower() == "barrière de glace")
@@ -205,7 +205,7 @@ public class SpellCasting : MonoBehaviour
             direction = 1;
         }
         fireball.transform.position = new Vector3(player.transform.position.x + direction / 10, player.transform.position.y, player.transform.position.z);
-        fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction * 7, 0, 0);
+        fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction * 3, 0, 0);
     }
 }
 
