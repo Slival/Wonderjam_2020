@@ -27,14 +27,14 @@ public class pressButton : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Boulder" || other.tag == "Player")
+        if (other.tag == "Boulder" || other.tag == "Player" || other.tag == "Spin")
         {
             pressing++;
         }
     }
     void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Boulder" || other.tag == "Player")
+        if (other.tag == "Boulder" || other.tag == "Player" || other.tag == "Spin")
         {
             pressing--;
         }

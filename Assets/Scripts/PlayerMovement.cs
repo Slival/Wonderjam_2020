@@ -166,7 +166,13 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x / 2f + Input.GetAxis("Horizontal") * speed / 20, rb.velocity.y);
             if (Input.GetAxis("Jump") == 1 && IsTouchingGround())
             {
-                rb.velocity = new Vector2(rb.velocity.x, 1.5f + 3 / Time.timeScale);
+                if (Time.timeScale == 0.2f)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, 4.5f);
+                } else
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, 1.5f + 3 / Time.timeScale);
+                }
                 jumpAvailable = false;
             }
         }

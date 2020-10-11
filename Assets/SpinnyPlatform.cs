@@ -18,9 +18,11 @@ public class SpinnyPlatform : MonoBehaviour
     {
         if (GetComponent<HingeJoint>())
         {
-            if (GetComponent<HingeJoint>().angle >= lockAngle - 0.5f && GetComponent<HingeJoint>().angle <= lockAngle + 0.5f)
+            // 175 <= 180 - 5f
+            //spin 180 - 175
+            if (GetComponent<HingeJoint>().angle >= lockAngle - 2f && GetComponent<HingeJoint>().angle <= lockAngle + 2f)
             {
-                GetComponent<HingeJoint>().transform.Rotate(0, lockAngle - GetComponent<HingeJoint>().angle,0);
+                GetComponent<HingeJoint>().transform.Rotate(lockAngle - GetComponent<HingeJoint>().angle, 0 , 0);
                 gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().material = lockMaterial;
                 gameObject.transform.GetChild(2).GetComponent<MeshRenderer>().material = lockMaterial;
                 Destroy(GetComponent<HingeJoint>());
