@@ -19,7 +19,6 @@ public class TextTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hasAnswer = true;
         success = false;
         Debug.Log(text.Length);
         textIndex = 0;

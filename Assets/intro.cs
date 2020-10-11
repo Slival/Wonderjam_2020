@@ -23,6 +23,8 @@ public class intro : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        gentil.GetComponent<PlayerMovement>().cap = 0;
+        gentil.GetComponent<PlayerMovement>().jumpAvailable = false;
         if (textTalking.final && typeText.finished && !started)
         {
             started = true;

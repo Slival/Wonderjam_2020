@@ -258,13 +258,13 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3397557}
   m_CullTransparentMesh: 0
---- !u!43 &41869284
+--- !u!43 &7882734
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-239108
+  m_Name: pb_Mesh-256882
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1250,7 +1250,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh199236
+  m_Name: pb_Mesh274518
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1578,7 +1578,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh199270
+  m_Name: pb_Mesh274552
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6713,10 +6713,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1276272625479271835, guid: 21446638aecc88f4895f3fe45149f314,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4519791683578297841, guid: 21446638aecc88f4895f3fe45149f314,
         type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 4519791683578297841, guid: 21446638aecc88f4895f3fe45149f314,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4615931319306419888, guid: 21446638aecc88f4895f3fe45149f314,
         type: 3}
@@ -6742,6 +6752,11 @@ PrefabInstance:
         type: 3}
       propertyPath: cap
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4615931319306419888, guid: 21446638aecc88f4895f3fe45149f314,
+        type: 3}
+      propertyPath: jumping
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4615931319306419889, guid: 21446638aecc88f4895f3fe45149f314,
         type: 3}
@@ -8863,7 +8878,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh199214
+  m_Name: pb_Mesh274496
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
