@@ -9718,6 +9718,7 @@ GameObject:
   - component: {fileID: 2653280964533958945}
   - component: {fileID: 5306128790197026479}
   - component: {fileID: 7233715550051905722}
+  - component: {fileID: 2276146540324777918}
   m_Layer: 0
   m_Name: Fireball
   m_TagString: Untagged
@@ -9780,6 +9781,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2276146540324777918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510643499788483802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c05b7537fa9048b4babf6fe1d4eb8ad2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8599454519270967956
 GameObject:
   m_ObjectHideFlags: 0

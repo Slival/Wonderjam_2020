@@ -146,7 +146,7 @@ public class SpellCasting : MonoBehaviour
 
                 fireball.transform.position = new Vector3(player.transform.position.x + direction / 10, player.transform.position.y, player.transform.position.z);
                 fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction * 2, 2, 0);
-
+                Destroy(GameObject.Find("IceWall(Clone)"));
             }
             if ((spellName.ToLower() == "stop time" || spellName.ToLower() == "time stop" || spellName.ToLower() == "slow time" || spellName.ToLower() == "temps mort") && timeStopStamp + 5 <= Time.fixedUnscaledTime)
             {
@@ -155,19 +155,6 @@ public class SpellCasting : MonoBehaviour
                 pm.airSpeed *= 3f;
                 pm.cap *= 3f;
                 timeStopStamp = Time.fixedUnscaledTime;
-            }
-            if (spellName.ToLower() == "ice barrier" || spellName.ToLower() == "barriere de glace" || spellName.ToLower() == "barrière de glace")
-            {
-                GameObject fireball = Instantiate(iceProjectilePrefab);
-                float direction = 1;
-                if (player.GetComponent<PlayerMovement>().goingLeft)
-                {
-                    player.GetComponent<Rigidbody>().AddForce(Vector3.up * 1000);
-                }
-                fireball.transform.position = new Vector3(player.transform.position.x + direction / 10, player.transform.position.y, player.transform.position.z);
-                fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction * 2, 2, 0);
-
-                Destroy(GameObject.Find("IceWall(Clone)"));
             }
             if (spellName.ToLower() == "lightning strike" || spellName.ToLower() == "eclair" || spellName.ToLower() == "éclair")
             {
@@ -218,7 +205,7 @@ public class SpellCasting : MonoBehaviour
             direction = 1;
         }
         fireball.transform.position = new Vector3(player.transform.position.x + direction / 10, player.transform.position.y, player.transform.position.z);
-        fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction * 3, 0, 0);
+        fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction * 7, 0, 0);
     }
 }
 
