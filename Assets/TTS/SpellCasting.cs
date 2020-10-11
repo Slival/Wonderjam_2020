@@ -13,6 +13,9 @@ public class SpellCasting : MonoBehaviour
     TMP_InputField input;
     private SpVoice voice;
     PlayerVariables player;
+    PlayerMovement pm;
+
+    private int timeStopCountDown;
 
     public GameObject fireballPrefab;
     public GameObject iceProjectilePrefab;
@@ -36,12 +39,15 @@ public class SpellCasting : MonoBehaviour
         voice = new SpVoice();
         input = GetComponent<TMP_InputField>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerVariables>();
+        pm = player.GetComponent<PlayerMovement>();
+        timeStopCountDown = -1;
         input.enabled = false;
     }
 
     IEnumerator OpenInput()
     {
-        Time.timeScale = 0.2f;
+        if (Time.timeScale == 1)
+            Time.timeScale = 0.2f;
         yield return new WaitForSeconds(0.1f);
         player.isTyping = true;
         yield return null;
@@ -49,13 +55,18 @@ public class SpellCasting : MonoBehaviour
 
     IEnumerator CloseInput()
     {
-        Time.timeScale = 1f;
+        //if (Time.timeScale < 0.1f)
+        //Time.timeScale = 1f;
         yield return new WaitForSeconds(0.1f);
         player.isTyping = false;
         yield return null;
     }
 
-
+    private void FixedUpdate()
+    {
+        if (timeStopCountDown > 0)
+            timeStopCountDown--;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -77,6 +88,11 @@ public class SpellCasting : MonoBehaviour
             input.enabled = false;
             StartCoroutine(CloseInput());
         }
+
+        if (timeStopCountDown == 0)
+        {
+            ResetTime();
+        }
     }
 
     void Cast(string spellName)
@@ -89,18 +105,19 @@ public class SpellCasting : MonoBehaviour
             {
                 fireball.transform.Rotate(new Vector3(180, 0, 0));
                 direction = -1;
-            } else
+            }
+            else
             {
                 fireball.transform.Rotate(new Vector3(0, 0, 0));
                 direction = 1;
             }
 
-            fireball.transform.position = new Vector3(player.transform.position.x + direction/10, player.transform.position.y, player.transform.position.z);
+            fireball.transform.position = new Vector3(player.transform.position.x + direction / 10, player.transform.position.y, player.transform.position.z);
             fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction * 3, 0, 0);
         }
         if (spellName.ToLower() == "arcane jump" || spellName.ToLower() == "super saut")
         {
-            player.GetComponent<Rigidbody>().AddForce(Vector3.up * 1000);
+            player.GetComponent<Rigidbody>().velocity = Vector3.up * 6;
         }
         if (spellName.ToLower() == "boulder toss" || spellName.ToLower() == "boulder throw" || spellName.ToLower() == "lancer de rocher")
         {
@@ -125,7 +142,11 @@ public class SpellCasting : MonoBehaviour
         }
         if (spellName.ToLower() == "stop time" || spellName.ToLower() == "temps mort")
         {
-            player.GetComponent<Rigidbody>().AddForce(Vector3.up * 1000);
+            Time.timeScale = 0.1f;
+            pm.speed *= 10;
+            pm.airSpeed *= 10;
+            player.GetComponent<Rigidbody>().mass *= 10;
+            timeStopCountDown = Time.unscaledTime;
         }
         if (spellName.ToLower() == "ice barrier" || spellName.ToLower() == "barriere de glace" || spellName.ToLower() == "barrière de glace")
         {
@@ -160,5 +181,14 @@ public class SpellCasting : MonoBehaviour
             player.transform.localScale += new Vector3(1.2f, 1.2f, 1.2f);
         }
     }
-
+    private void ResetTime()
+    {
+        if (Time.timeScale < 0.2f)
+        {
+            Time.timeScale = 1;
+            pm.speed /= 10;
+            pm.airSpeed /= 10;
+            player.GetComponent<Rigidbody>().mass /= 10;
+        }
+    }
 }

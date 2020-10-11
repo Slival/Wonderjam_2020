@@ -263,7 +263,7 @@ MonoBehaviour:
   goingLeft: 0
   pVar: {fileID: 7216332263829823560}
   playerSprite: {fileID: 3783544917071251585}
-  walking: 0
+  idling: 0
   jumping: 0
 --- !u!114 &2687986969343173707
 MonoBehaviour:

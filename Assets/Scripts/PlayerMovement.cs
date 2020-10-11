@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed;
     public float airSpeed;
     public float cap;
+    public float weight;
     public bool goingLeft;
     public PlayerVariables pVar;
     public SpriteRenderer playerSprite;
