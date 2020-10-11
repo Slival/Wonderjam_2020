@@ -7,6 +7,7 @@ public class TextTrigger : MonoBehaviour
     public GameObject textbox;
     public string[] text;
     public string answer;
+    public bool hasAnswer;
     public string[] successText;
     public SpellCasting sCasting;
     public GameObject barrier;
@@ -18,6 +19,7 @@ public class TextTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        hasAnswer = true;
         success = false;
         Debug.Log(text.Length);
         textIndex = 0;

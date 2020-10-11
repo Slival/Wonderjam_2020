@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public int sceneIndex;
+    public string sceneName;
     // Start is called before the first frame update
     void Start()
     {
