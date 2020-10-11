@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerSprite.gameObject.GetComponent<Animator>().SetBool("falling", true);
         }
-        if (IsTouchingGround())
+        else
         {
             playerSprite.gameObject.GetComponent<Animator>().SetBool("falling", false);
         }
@@ -165,7 +165,7 @@ public class PlayerMovement : MonoBehaviour
         //if (jumpAvailable && !pVar.isTyping)
         //{
             rb.velocity = new Vector2(rb.velocity.x / 1.5f + Input.GetAxis("Horizontal") * speed / 20, rb.velocity.y);
-            if (Input.GetAxis("Jump") == 1 && IsTouchingGround())
+            if (Input.GetAxis("Jump") == 1 && IsTouchingGround() && !pVar.isTyping)
             {
                 rb.velocity = new Vector2(rb.velocity.x, 5);
                 jumpAvailable = false;
