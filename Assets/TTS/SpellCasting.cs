@@ -15,7 +15,7 @@ public class SpellCasting : MonoBehaviour
     PlayerVariables player;
     PlayerMovement pm;
 
-    private int timeStopCountDown;
+    private float timeStopStamp;
 
     public GameObject fireballPrefab;
     public GameObject iceProjectilePrefab;
@@ -40,7 +40,6 @@ public class SpellCasting : MonoBehaviour
         input = GetComponent<TMP_InputField>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerVariables>();
         pm = player.GetComponent<PlayerMovement>();
-        timeStopCountDown = -1;
         input.enabled = false;
     }
 
@@ -55,18 +54,13 @@ public class SpellCasting : MonoBehaviour
 
     IEnumerator CloseInput()
     {
-        //if (Time.timeScale < 0.1f)
-        //Time.timeScale = 1f;
+        if (Time.timeScale >= 0.2f)
+            Time.timeScale = 1f;
         yield return new WaitForSeconds(0.1f);
         player.isTyping = false;
         yield return null;
     }
-
-    private void FixedUpdate()
-    {
-        if (timeStopCountDown > 0)
-            timeStopCountDown--;
-    }
+    
     // Update is called once per frame
     void Update()
     {
@@ -89,7 +83,7 @@ public class SpellCasting : MonoBehaviour
             StartCoroutine(CloseInput());
         }
 
-        if (timeStopCountDown == 0)
+        if (timeStopStamp + 5 <= Time.fixedUnscaledTime)
         {
             ResetTime();
         }
@@ -99,21 +93,7 @@ public class SpellCasting : MonoBehaviour
     {
         if (spellName.ToLower() == "fireball" || spellName.ToLower() == "boule de feu")
         {
-            GameObject fireball = Instantiate(fireballPrefab);
-            float direction;
-            if (player.GetComponent<PlayerMovement>().goingLeft)
-            {
-                fireball.transform.Rotate(new Vector3(180, 0, 0));
-                direction = -1;
-            }
-            else
-            {
-                fireball.transform.Rotate(new Vector3(0, 0, 0));
-                direction = 1;
-            }
-
-            fireball.transform.position = new Vector3(player.transform.position.x + direction / 10, player.transform.position.y, player.transform.position.z);
-            fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction * 3, 0, 0);
+            CastFireball();
         }
         if (spellName.ToLower() == "arcane jump" || spellName.ToLower() == "super saut")
         {
@@ -146,7 +126,7 @@ public class SpellCasting : MonoBehaviour
             pm.speed *= 10;
             pm.airSpeed *= 10;
             player.GetComponent<Rigidbody>().mass *= 10;
-            timeStopCountDown = Time.unscaledTime;
+            timeStopStamp = Time.fixedUnscaledTime;
         }
         if (spellName.ToLower() == "ice barrier" || spellName.ToLower() == "barriere de glace" || spellName.ToLower() == "barrière de glace")
         {
@@ -180,6 +160,13 @@ public class SpellCasting : MonoBehaviour
         {
             player.transform.localScale += new Vector3(1.2f, 1.2f, 1.2f);
         }
+        if (spellName.ToLower() == "aeiou" || spellName.ToLower() == "john madden")
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                CastFireball();
+            }
+        }
     }
     private void ResetTime()
     {
@@ -191,4 +178,23 @@ public class SpellCasting : MonoBehaviour
             player.GetComponent<Rigidbody>().mass /= 10;
         }
     }
+    private void CastFireball()
+    {
+        GameObject fireball = Instantiate(fireballPrefab);
+        float direction;
+        if (player.GetComponent<PlayerMovement>().goingLeft)
+        {
+            fireball.transform.Rotate(new Vector3(180, 0, 0));
+            direction = -1;
+        }
+        else
+        {
+            fireball.transform.Rotate(new Vector3(0, 0, 0));
+            direction = 1;
+        }
+
+        fireball.transform.position = new Vector3(player.transform.position.x + direction / 10, player.transform.position.y, player.transform.position.z);
+        fireball.GetComponent<Rigidbody>().velocity = new Vector3(direction * 3, 0, 0);
+    }
 }
+

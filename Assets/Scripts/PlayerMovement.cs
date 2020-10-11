@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour
     public float speed;
     public float airSpeed;
     public float cap;
-    public float weight;
     public bool goingLeft;
     public PlayerVariables pVar;
     public SpriteRenderer playerSprite;
@@ -86,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerSprite.gameObject.GetComponent<Animator>().SetBool("falling", true);
         }
-        else
+        if (IsTouchingGround())
         {
             playerSprite.gameObject.GetComponent<Animator>().SetBool("falling", false);
         }
@@ -162,19 +161,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        //if (jumpAvailable && !pVar.isTyping)
-        //{
+        if (jumpAvailable && !pVar.isTyping)
+        {
             rb.velocity = new Vector2(rb.velocity.x / 1.5f + Input.GetAxis("Horizontal") * speed / 20, rb.velocity.y);
-            if (Input.GetAxis("Jump") == 1 && IsTouchingGround() && !pVar.isTyping)
+            if (Input.GetAxis("Jump") == 1 && IsTouchingGround())
             {
                 rb.velocity = new Vector2(rb.velocity.x, 5);
                 jumpAvailable = false;
             }
-    //}
-        //else if (!pVar.isTyping)
-        //{
-           // rb.velocity = new Vector2(rb.velocity.x + Input.GetAxis("Horizontal") * airSpeed / 20, rb.velocity.y);
-        //}
+        }
+        else if (!pVar.isTyping)
+        {
+            rb.velocity = new Vector2(rb.velocity.x + Input.GetAxis("Horizontal") * airSpeed / 20, rb.velocity.y);
+        }
     }
 
     private void CapVelocity()
