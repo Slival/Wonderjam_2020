@@ -8,6 +8,8 @@ public class mainmenu : MonoBehaviour
     public blackenScreen canvaboi;
     public GameObject credits;
     public bool creditsShown;
+    public AudioSource audios;
+    public AudioClip startgame;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +20,7 @@ public class mainmenu : MonoBehaviour
     public void PlayGame()
     {
         StartCoroutine(startGame());
+        audios.Play();
     }
 
     IEnumerator startGame()

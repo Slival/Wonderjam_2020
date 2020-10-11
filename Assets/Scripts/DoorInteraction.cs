@@ -7,6 +7,7 @@ public class DoorInteraction : MonoBehaviour
 {
     private string sceneName;
     private bool canEnterDoor;
+    public AudioSource aus;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,7 @@ public class DoorInteraction : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W) && canEnterDoor)
         {
             SceneManager.LoadScene(sceneName);
+            aus.Play();
         }
     }
 
