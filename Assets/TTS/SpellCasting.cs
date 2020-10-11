@@ -129,14 +129,6 @@ public class SpellCasting : MonoBehaviour
                 boulder.GetComponent<Rigidbody>().velocity = new Vector3(direction * 2, 2, 0);
 
             }
-            if (spellName.ToLower() == "stop time" || spellName.ToLower() == "temps mort")
-            {
-                Time.timeScale = 0.3334f;
-                pm.speed *= 3;
-                pm.airSpeed *= 3;
-                pm.cap *= 3;
-                timeStopStamp = Time.unscaledTime;
-            }
             if (spellName.ToLower() == "ice barrier" || spellName.ToLower() == "barriere de glace" || spellName.ToLower() == "barrière de glace")
             {
                 GameObject fireball = Instantiate(iceProjectilePrefab);
