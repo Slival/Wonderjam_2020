@@ -266,6 +266,7 @@ MonoBehaviour:
   idling: 0
   jumping: 0
   jumpAvailable: 1
+  ps: {fileID: 0}
 --- !u!114 &2687986969343173707
 MonoBehaviour:
   m_ObjectHideFlags: 0

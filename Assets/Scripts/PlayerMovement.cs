@@ -31,7 +31,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-
         rb = gameObject.GetComponent<Rigidbody>();
         oldXVelocity = 0;
         if (playerSprite == null)
