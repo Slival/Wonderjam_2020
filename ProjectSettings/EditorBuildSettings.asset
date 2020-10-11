@@ -16,8 +16,17 @@ EditorBuildSettings:
     guid: be15732f0c63bba499d6e4b728822013
   - enabled: 1
     path: Assets/Scenes/Puzzle1.unity
-    guid: 5b3efe59b244e3d49897d18fa6d18e5f
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+    guid: 81ad86513fd00214bb6eafbe98a41d5a
+  - enabled: 1
+    path: Assets/Scenes/Puzzle2.unity
+    guid: 8b1ef9749fce4124786965e5724b1af6
+  - enabled: 1
+    path: Assets/Scenes/Puzzle6.unity
+    guid: a2f9a24b596e41342a2b09b85df36383
+  - enabled: 1
+    path: Assets/Scenes/Puzzle7.unity
+    guid: 7de10287e3a227d4ea95da42ac71b61b
+  - enabled: 1
+    path: Assets/Scenes/Boutton Test.unity
+    guid: a6c4c0afd902ced47b39ea0b50e68bf9
   m_configObjects: {}
