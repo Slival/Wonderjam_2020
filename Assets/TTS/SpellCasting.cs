@@ -40,7 +40,7 @@ public class SpellCasting : MonoBehaviour
     {
         voice = new SpVoice();
         input = GetComponent<TMP_InputField>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerVariables>();
+        player = GameObject.Find("Player").GetComponent<PlayerVariables>();
         pm = player.GetComponent<PlayerMovement>();
         input.enabled = false;
     }

@@ -8273,9 +8273,9 @@ MonoBehaviour:
   textbox: {fileID: 1529176591}
   text:
   - Hahahahah! Foolish J. Madden! Not only have I transformed you into a silly fish...
-  - But I've also severely destroyed all your hope of ever using magic ever again...!
-  - You'll never make it out of the forest without your sly little tricks at your
-    disposal! Goodbye John!
+  - But I've also destroyed all your hopes of using regular magic ever again...!
+  - You'll never make it out of the forest without your sly little tricksl! Goodbye
+    John!
   sCasting: {fileID: 1602680721}
   textIndex: 0
   final: 0
@@ -9378,7 +9378,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: beb61920bc7a273438d43539423c0b46, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1b456627c1e1d2543b788dbebac3950f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
